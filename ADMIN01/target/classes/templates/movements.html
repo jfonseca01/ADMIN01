@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+
+<html lang="es"
+      xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" />
+
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.1.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $("#table").DataTable();
+        })
+    </script>
+    <title>Movimientos</title>
+</head>
+<body class="m-3">
+    <main sec:authorize="isAuthenticated()" class="d-flex">
+        <section class="side-bar col-3">
+            <div>
+                <h2>Solution Business Data</h2>
+            </div>
+            <div class="align-middle">
+                <ul>
+                    <li> <a class="btn btn-primary m-2" href="/enterprises/1/movements">Movimientos</a> </li>
+                    <li> <a class="btn btn-primary m-2" href="/users">Empleados</a> </li>
+                </ul>
+            </div>
+            <div class="align-bot">
+                <a class="btn btn-danger" th:href="@{/logout}">Salir</a>
+            </div>
+        </section>
+        <section class="col-9 flex-column justify-content-around">
+
+            <div class="text-center">
+                <h2>Sistema de gestión de ingresos y gastos</h2>
+                <span>Movimientos</span>
+            </div>
+            <div class='container d-flex flex-column m-5'>
+                <a class="btn btn-primary align-self-end my-2" href="/create/movement">nuevo</a>
+                <table id="table" class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">Concepto</th>
+                        <th scope="col">Monto</th>
+                        <th scope="col">Empleado</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="movement : ${movements}">
+                        <th scope="row" th:text="${movement.concepto}"></th>
+                        <td th:text="${movement.monto}"></td>
+                        <td th:text="${movement.empleado.nombre}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+    <div sec:authorize="!isAuthenticated()">
+        <a th:href="/login" class="btn btn-primary">login</a>
+    </div>
+</body>
+</html>

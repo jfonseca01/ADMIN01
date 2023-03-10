@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es"
+      xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <title>Login</title>
+</head>
+<body class="m-3">
+
+    <h1>Solution Business Data</h1>
+    <hr />
+    <div className='container'>
+        <form method="post" th:object="${user}" th:action="@{/login}">
+            <h2>Login</h2>
+            <div class="mb-3">
+                <label for="email" class="form-label">Correo</label>
+                <input type="email" class="form-control" th:field="*{correo}" id="email" aria-describedby="emailHelp" placeholder="Enter an email" autofocus/>
+                <div id="emailHelp" class="form-text">No compartas tu correo con nadie.</div>
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Contraseña</label>
+                <input type="password" class="form-control" th:field="*{password}" id="password" placeholder="Password" />
+            </div>
+            <button type="submit" class="btn btn-primary">Entrar</button>
+        </form>
+    </div>
+</body>
+</html>

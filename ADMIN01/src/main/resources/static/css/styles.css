@@ -1,0 +1,21 @@
+ul{
+    list-style: none;
+}
+
+a{
+    text-decoration: none;
+}
+
+.side-bar {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 90vh;
+    align-items: center;
+}
+
+.content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

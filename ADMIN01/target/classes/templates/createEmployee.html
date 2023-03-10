@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es"
+      xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <title>Nuevo</title>
+</head>
+<body sec:authorize="isAuthenticated()" class="d-flex">
+    <section class="side-bar col-3">
+        <div>
+            <h2>Solution Business Data</h2>
+        </div>
+        <div class="align-middle">
+            <ul>
+                <li> <a class="btn btn-primary m-2" href="/enterprises/1/movements">Movimientos</a> </li>
+                <li> <a class="btn btn-primary m-2" href="/users">Empleados</a> </li>
+            </ul>
+        </div>
+        <div class="align-bot">
+            <a class="btn btn-danger" th:href="@{logout}">Salir</a>
+        </div>
+    </section>
+    <section class="col-9 flex-column justify-content-around">
+        <div class="text-center">
+            <h2>Sistema de gestión de ingresos y gastos</h2>
+            <span>Crear empleado</span>
+        </div>
+        <div th:object="${employee}" class='container d-flex flex-column m-5'>
+            <h2>Nuevo empleado</h2>
+            <p th:text="${correo}"></p>
+            <p th:text="${empresa}"></p>
+            <form method="post" th:object="${employee}" th:action="@{/create/employee}">
+                <div class="form-group">
+                    <label for="nombre">Nombre empleado</label>
+                    <input type="text" class="form-control" th:field="*{nombre}" id="nombre"  placeholder="Ingresa el nombre" >
+                </div>
+                <div class="form-group">
+                    <select name="roles" id="rol">
+                        <option th:each="rol: ${roles}" th:value="${rol}" th:text="${rol}" th:field="*{roles}"></option>
+                    </select>
+                </div>
+                <input type="text" class="form-control" th:value="*{correo}" th:field="*{correo}" id="correo"  placeholder="Correo" disabled/>
+                <button type="submit" class="btn btn-primary">Terminar</button>
+            </form>
+        </div>
+        </table>
+    </section>
+</body>
+</html>
